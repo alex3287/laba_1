@@ -1,14 +1,12 @@
 #ifndef IOBSERVER_H
 #define IOBSERVER_H
 
-#include <QObject>
+//#include <QObject>
 #include <QString>
 
-class IObserver : QObject
+class IObserver
 {
-    Q_OBJECT
 public:
-//    IObserver();
     virtual void update(QString name);
 };
 
