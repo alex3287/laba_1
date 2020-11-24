@@ -7,7 +7,7 @@
 class IObserver
 {
 public:
-    virtual void update(QString name);
+    virtual void update_size(int file_size) = 0;
 };
 
 #endif // IOBSERVER_H
