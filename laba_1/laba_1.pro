@@ -10,7 +10,8 @@ CONFIG -= app_bundle
 SOURCES += \
         file.cpp \
         iobserver.cpp \
-        main.cpp
+        main.cpp \
+        subject.cpp
 
 TRANSLATIONS += \
     laba_1_ru_RU.ts
@@ -22,4 +23,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     file.h \
-    iobserver.h
+    iobserver.h \
+    subject.h
