@@ -12,13 +12,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     QTextStream out(stdout);
 
-    // test QTimer
-
-    // test QString
-    QString s = "Hello world!";
-    out<<s << "  "<< endl;
-
-    //test comand line
+//    test comand line
     if (argc > 1){
         // file name it is arg
         QString f1 = argv[1];
@@ -38,20 +32,8 @@ int main(int argc, char *argv[])
         out<<f2<<endl;
     }
 
-    // test comand line
-    QVector <File*> Files;
-    if (argc > 1){
-        int k = argc; // count files
-        for (int i=1;i<k;i++){
-            QString name(argv[i]);
-            File temp(name);
-            File *Ptrtemp = &temp;
-            Files.push_back(Ptrtemp);
 
-        }
-    }
-
-    // test pattern
+//     test pattern
     Client files;
     File f1("First");
     File f2("Second");
