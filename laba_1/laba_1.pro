@@ -11,7 +11,8 @@ SOURCES += \
         file.cpp \
         iobserver.cpp \
         main.cpp \
-        subject.cpp
+        subject.cpp \
+        testqtimer.cpp
 
 TRANSLATIONS += \
     laba_1_ru_RU.ts
@@ -24,4 +25,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     file.h \
     iobserver.h \
-    subject.h
+    subject.h \
+    testqtimer.h

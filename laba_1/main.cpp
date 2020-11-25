@@ -2,12 +2,17 @@
 #include <QTextStream>
 #include <QString>
 #include <QFileInfo>
+#include "testqtimer.h"
+#include <QTimer>
 
 int main(int argc, char *argv[])
 {
 
     QCoreApplication a(argc, argv);
     QTextStream out(stdout);
+
+    // test QTimer
+    TestQTimer my_timer;
 
     // test QString
     QString s = "Hello world!";
@@ -33,5 +38,6 @@ int main(int argc, char *argv[])
         out<<f2<<endl;
     }
 
+    QTimer::setInterval(1000, SIGNAL(timeout()), &a, SLOT(my_timer.set_file()));
     return a.exec();
 }
