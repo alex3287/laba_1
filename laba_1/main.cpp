@@ -2,6 +2,7 @@
 #include <QTextStream>
 #include <QString>
 #include <QFileInfo>
+#include <QTimer>
 
 int main(int argc, char *argv[])
 {
