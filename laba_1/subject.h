@@ -4,7 +4,7 @@
 #include <QObject>
 #include "file.h"
 
-class Subject
+class Subject: public QObject
 {
     Q_OBJECT
 signals:

@@ -9,7 +9,7 @@
 //наследуем от QObject чтобы можно было работать со slots и signal
 class IObserver: public QObject
 {
-    Q_OBJECT  //специальный макрос
+    Q_OBJECT
 public slots: //слот отвечающий за обновления размера файла
     virtual void update_size(int newFileSize) = 0;
 };
