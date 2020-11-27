@@ -1,19 +1,21 @@
 #ifndef FILE_H
 #define FILE_H
 
-#include <QObject>
+
 #include <QString>
 #include "iobserver.h"
 
-class File : QObject, public IObserver
+
+class File : public IObserver
 {
     Q_OBJECT
 private:
     QString name;
-    int file_size;
+    int fileSize;
 public:
     File(QString name);
-    void update_size(int file_size);
+public slots:
+    void update_size(int newFileSize);
 };
 
 #endif // FILE_H

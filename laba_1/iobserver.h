@@ -1,13 +1,17 @@
 #ifndef IOBSERVER_H
 #define IOBSERVER_H
 
-//#include <QObject>
-#include <QString>
+#include <QObject>
 
-class IObserver
+//Класс интерфейс, от которого будет наследоваться класс File
+
+
+//наследуем от QObject чтобы можно было работать со slots и signal
+class IObserver: public QObject
 {
-public:
-    virtual void update_size(int file_size) = 0;
+    Q_OBJECT  //специальный макрос
+public slots: //слот отвечающий за обновления размера файла
+    virtual void update_size(int newFileSize) = 0;
 };
 
 #endif // IOBSERVER_H
