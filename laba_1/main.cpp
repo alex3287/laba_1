@@ -3,6 +3,7 @@
 #include <QString>
 #include <QFileInfo>
 #include <QVector>
+#include <QTimer>
 #include "file.h"
 #include "client.h"
 
@@ -27,10 +28,6 @@ int main(int argc, char *argv[])
         QString str = "The size is: %1 bytes";
         out << str.arg(size) << endl;
     }
-    if (argc > 2){
-        QString f2 = argv[2];
-        out<<f2<<endl;
-    }
 
 
 //     test pattern
@@ -43,5 +40,7 @@ int main(int argc, char *argv[])
     files.change_size(500);
     files.detach(&f2);
     files.change_size(100);
+
+    QTimer::singleShot(0, &a, SLOT(quit()));
     return a.exec();
 }
