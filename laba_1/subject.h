@@ -7,6 +7,7 @@
 class Subject: public QObject
 {
     Q_OBJECT
+
 signals:
     void size_change(int newFileName);
 };
