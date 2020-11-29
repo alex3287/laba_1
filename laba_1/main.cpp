@@ -50,22 +50,16 @@ int main(int argc, char *argv[])
     QObject::connect(&files, &Client::size_change,
                          &file2, &File::update_size);
 
-//    files.size_change(size);
+    files.size_change(size);
     out<<endl;
     int flag = 1;
     while (true) {
-        // Создаем объект
-        QFileInfo fileinfo(nameFile);
-
-        // Определяем размер файла с помощью метода size()
-        qint64 size = fileinfo.size();
-        size = fileinfo.size();
         files.size_change(size);
         out<<"check fieles 1/0 (yes/no) "<<endl;
         in >> flag;
         if (flag == 0)
             break;
-
+        size = fileinfo.size();
     }
 
     //прекращаем следить за вторым файлом

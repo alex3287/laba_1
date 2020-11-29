@@ -23,3 +23,5 @@
 https://nicknixer.ru/programmirovanie/qtimer-sozdanie-tajmera-i-obrabotka-ego-sobytij-s-primerom-programmy/
 
 Также можно, например рассмотреть такую возможность  std::this_thread::sleep_for( std::chrono::milliseconds( 100 ) );
+
+## Описание программы
