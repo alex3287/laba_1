@@ -48,10 +48,8 @@ int main(int argc, char *argv[])
 
 
     //начинаем следить за файлами
-    QObject::connect(&files, &Client::size_change,
-                         &file1, &File::update_size);
-    QObject::connect(&files, &Client::size_change,
-                         &file2, &File::update_size);
+    files.attach(&file1);
+    files.attach(&file2);
 
     files.size_change();
     out<<endl;
@@ -69,6 +67,6 @@ int main(int argc, char *argv[])
 //                         &file2, &File::update_size);
 //    files.size_change(34);
 
-    QTimer::singleShot(2000,  &a, SLOT(quit()));
+    QTimer::singleShot(1000,  &a, SLOT(quit()));
     return a.exec();
 }

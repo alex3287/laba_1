@@ -8,11 +8,14 @@
 class Subject: public QObject
 {
     Q_OBJECT
-
+public:
+    void attach(File *file);
+    void detach(File *file);
+    void notify();
 signals:
     void size_change();
-
-
+private:
+    QVector <File*> list;
 };
 
 #endif // SUBJECT_H
