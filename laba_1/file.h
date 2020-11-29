@@ -14,8 +14,10 @@ private:
     int fileSize;
 public:
     File(QString name);
+    int newFileSize(void);
 public slots:
-    void update_size(int newFileSize);
+    void update_size(void);
+
 };
 
 #endif // FILE_H

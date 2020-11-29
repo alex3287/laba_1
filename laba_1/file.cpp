@@ -1,18 +1,33 @@
 #include "file.h"
 #include "client.h"
 #include <QTextStream>
+#include <QFileInfo>
+
 
 QTextStream out(stdout);
-
+QTextStream in(stdin);
 File::File(QString name): name(name){}
 
 Client *ptrClient = new(Client);
 
-void File::update_size(int newFileSize)
+// Обновляем размер файла
+void File::update_size(void)
 {
-    if (fileSize != newFileSize){
-        fileSize = newFileSize;
-        emit ptrClient -> size_change(newFileSize);
-    }
+    int newSize = newFileSize();
+    if (fileSize != newSize){
+        fileSize = newSize;
+        emit ptrClient -> size_change();
+}
     out<<"Size at "<<name<<" is now "<<fileSize<<endl;
+}
+
+// Получаем размер файла
+int File::newFileSize(void)
+{
+    // Создаем объект
+    QFileInfo fileinfo(name);
+
+    // Определяем размер файла с помощью метода size()
+    qint64 size = fileinfo.size();
+    return size;
 }
