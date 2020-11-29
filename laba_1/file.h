@@ -9,15 +9,15 @@
 class File :public IObserver
 {
     Q_OBJECT
-private:
-    QString name;
-    int fileSize;
 public:
     File(QString name);
     int newFileSize(void);
+    QString printFileName();
 public slots:
     void update_size(void);
-
+private:
+    QString name;
+    int fileSize;
 };
 
 #endif // FILE_H

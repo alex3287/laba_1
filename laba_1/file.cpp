@@ -10,6 +10,12 @@ File::File(QString name): name(name){}
 
 Client *ptrClient = new(Client);
 
+// Печатыем имя файла
+QString File::printFileName()
+{
+    return name;
+}
+
 // Обновляем размер файла
 void File::update_size(void)
 {

@@ -11,7 +11,6 @@ class Subject: public QObject
 public:
     void attach(File *file);
     void detach(File *file);
-    void notify();
 signals:
     void size_change();
 private:
