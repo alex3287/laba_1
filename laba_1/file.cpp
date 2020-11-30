@@ -11,7 +11,7 @@ File::File(QString name): name(name){}
 Client *ptrClient = new(Client);
 
 // Печатыем имя файла
-QString File::printFileName()
+QString File::getFileName()
 {
     return name;
 }

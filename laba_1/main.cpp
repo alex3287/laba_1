@@ -10,6 +10,15 @@
 #include "client.h"
 #include <typeinfo>
 
+bool checkFile(QString name)
+{
+    if (!QFile(name).exists()) {
+        return false;
+    };
+    return true;
+};
+
+
 int main(int argc, char *argv[])
 {
     QTextStream out(stdout);
@@ -26,7 +35,7 @@ int main(int argc, char *argv[])
     out<<"Enter file name 2"<<endl;
     in >> fileName2;
 // Проверяем существование файла
-    if ((!QFile(fileName).exists()) && (!QFile(fileName2).exists())) {
+    if ((!QFile(fileName).exists()) || (!QFile(fileName2).exists())) {
         qWarning("The file does not exist"); // если файл не найден, то выводим предупреждение и завершаем работу программы
         return 1;
     }
@@ -45,33 +54,49 @@ int main(int argc, char *argv[])
     int flagSecond = second;
     int flag = 1; // служит для окончания работы программы
     while (flag == 1) {
+        if (checkFile(file1.getFileName())){
         out<<"Enter 1 for track first file or 0 for untrack"<<endl;
         in>>first;
+            // начинаю следить за 1 файлом
+            if ((first == 1) && (flagFirst == 0)){
+                files.attach(&file1);
+                flagFirst = 1;
+                out<<"start track file "<<file1.getFileName()<<endl;
+            }
+            //перестаю следить за 1 файлом
+            else if (flagFirst != first){
+                files.detach(&file1);
+                flagFirst = 0;
+                out<<"stop track file "<<file1.getFileName()<<endl;
+            }
+        } else if ((flagFirst == 0) || (flagFirst == 1)) {
+            files.detach(&file1);
+            flagFirst = 2;
+            out<<"stop track file "<<file1.getFileName()<<" was delete!!!"<<endl;
+        }
+
+        if (checkFile(file2.getFileName())){
         out<<"Enter 1 for track second file or 0 for untrack"<<endl;
         in>>second;
-        // начинаю следить за 1 файлом
-        if ((first == 1) && (flagFirst == 0)){
-            files.attach(&file1);
-            flagFirst = 1;
-            out<<"start track "<<file1.printFileName()<<endl;
-        }
-        //перестаю следить за 1 файлом
-        else if (flagFirst != first){
-            files.detach(&file1);
-            flagFirst = 0;
-            out<<"stop track "<<file1.printFileName()<<endl;
-        }
-        if ((second == 1) && (flagSecond == 0)){
-            files.attach(&file2);
-            flagSecond = 1;
-            out<<"start track "<<file2.printFileName()<<endl;
-        }
-        else if (flagSecond != second){
+            if ((second == 1) && (flagSecond == 0)){
+                files.attach(&file2);
+                flagSecond = 1;
+                out<<"start track file "<<file2.getFileName()<<endl;
+            }
+            else if (flagSecond != second){
+                files.detach(&file2);
+                flagSecond = 0;
+                out<<"stop track file "<<file2.getFileName()<<endl;
+            }
+        } else if ((flagSecond == 0) || (flagSecond == 1)) {
             files.detach(&file2);
-            flagSecond = 0;
-            out<<"stop track "<<file2.printFileName()<<endl;
+            flagSecond = 2;
+            out<<"stop track file "<<file2.getFileName()<<" was delete!!!"<<endl;
         }
-        files.size_change();
+        if ((checkFile(file2.getFileName())) || (checkFile(file2.getFileName()))){
+            files.size_change();
+        }
+
         // выбор на завершение или продолжение программы
         out<<"check fieles 1/0 (yes/no) "<<endl;
         in >> flag;

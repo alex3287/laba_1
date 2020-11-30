@@ -12,7 +12,7 @@ class File :public IObserver
 public:
     File(QString name);
     int newFileSize(void);
-    QString printFileName();
+    QString getFileName();
 public slots:
     void update_size(void);
 private:
