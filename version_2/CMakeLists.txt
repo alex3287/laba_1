@@ -35,5 +35,6 @@ target_link_libraries(
         MyAwesomeQtProject
         # список библиотек
         Qt5::Core
+
         # и т.д., например Qt5::Widgets, Qt5::Charts
 )

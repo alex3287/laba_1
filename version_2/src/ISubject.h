@@ -13,6 +13,7 @@ class ISubject: public QObject{
 public:
     virtual void addFile(IObserver *obj) = 0;
     virtual void removeFile(IObserver *obj) = 0;
+    virtual void notify() = 0;
     virtual void showLists() = 0;
 
     // TODO реализация с помощью сигналов и слотов

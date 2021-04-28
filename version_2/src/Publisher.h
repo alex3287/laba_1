@@ -16,15 +16,13 @@
 class Publisher: public ISubject{
     Q_OBJECT
 public:
-//    Publisher(QString n, double s);
+
     Publisher();
-    //TODO нижние 2 функции удалить
-//    double getSize();
-//    QString getName();
 
     void addFile(IObserver *obj) override;
     void removeFile(IObserver *obj) override;
     void showLists() override;
+    void notify() override;
 
     // TODO реализация с помощью сигналов и слотов
     void attach(IObserver *obj) override;

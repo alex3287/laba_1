@@ -16,7 +16,9 @@ public:
     File(QString name, qint64 size);
     qint64 getSize() override;
     QString getName() override;
-    qint64 newFileSize();
+    qint64 newFileSize(QString n);
+    void setSize(qint64 newSize);
+    void setName(QString newName);
 public slots:
     void updateSize();
 private:

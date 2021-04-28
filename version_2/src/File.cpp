@@ -19,13 +19,21 @@ QString File::getName() {
 }
 
 void File::updateSize() {
-    qint64 newSize = newFileSize();
+    qint64 newSize = newFileSize(name);
     if (size != newSize)
-        this->size += newSize;
+        size = newSize;
 }
 
-qint64 File::newFileSize() {
-    QFileInfo fileinfo(this->name);
+qint64 File::newFileSize(QString n) {
+    QFileInfo fileinfo(n);
     qint64 fileSize = fileinfo.size();
     return fileSize;
+}
+
+void File::setSize(qint64 newSize) {
+    size = newSize;
+}
+
+void File::setName(QString newName) {
+    name = newName;
 }
