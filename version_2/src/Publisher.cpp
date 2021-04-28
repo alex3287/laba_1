@@ -24,7 +24,7 @@ void Publisher::showLists() {
     out<<"\t\t\tList files"<<endl;
     int i=0;
     for (auto obj: files)
-        out<<++i<<" File name: "<<obj->getName()<<", file size: "<<obj->getSize()<<endl;
+        out<<++i<<") File name: "<<obj->getName()<<", file size: "<<obj->getSize()<<endl;
     out<<"\t\t\tEND"<<endl;
     out<<"===================================\n"<<endl;
 }

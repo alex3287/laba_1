@@ -52,27 +52,26 @@ int main() {
 //    }
 
 //    проверяю список имен
-    for (auto fn: filesName){
-        out<<fn<<endl;
-    }
+//    for (auto fn: filesName){
+//        out<<fn<<endl;
+//    }
 
 // Проверяем существование файла
 // если файл не найден, то выводим предупреждение и завершаем работу программы
-//    for (auto fname: filesName)
-//    if (!QFile(fname).exists()) {
-//        qWarning("The file does not exist");
-//        return 1;
-//    }
+    for (auto fname: filesName)
+    if (!QFile(fname).exists()) {
+        qWarning("The file does not exist");
+        return 1;
+    }
 
 //создаем объект наблюдатель
-//    Publisher publisher;
+    Publisher publisher;
 
 // создаем пустой список объектов типа File
-//    std::vector<File> Files;
-//    File fileTemp("test", 0);
-// вычисляем размеры файлов и добавляем их в список
-//    for (auto fn: filesName) {
+    std::vector<File*> Files;
 
+// вычисляем размеры файлов и добавляем их в список
+    for (auto fn: filesName) {
 //        QFileInfo fileinfo(filesName[0]);
 //        qint64 size = fileinfo.size();
 //        File file1(filesName[0],size);
@@ -83,79 +82,59 @@ int main() {
 //        size = fileinfo1.size();
 //        File file3(filesName[2], size);
 
+        QFileInfo fileinfo(fn);
+        qint64 size = fileinfo.size();
+        File *file = new File(fn, size);
+        Files.push_back(file);
+    }
 
-//        fileTemp.setName(fn);
-//        fileTemp.setSize(size);
-////        File *file = new File(fn, size);
-//        Files.push_back(fileTemp(fn, size));
-//    }
-
-//    for (auto i: Files)
-//            out<<i->getName()<<" "<<i->getSize()<<endl;
+// проверка содержимого списка
+    for (auto i: Files)
+            out<<i->getName()<<" "<<i->getSize()<<endl;
 
 // делаем подписку
 //        publisher.addFile(&file1);
 //        publisher.addFile(&file2);
 //        publisher.addFile(&file3);
-//    for (auto file: Files) {
-//        publisher.addFile(file);
-//    }
+    for (auto file: Files) {
+        publisher.addFile(file);
+    }
 
 //    программа начинает следить за файлами пока ее не остановят
-//    int flag = 1, number = 0, untrackedFiles[3] {0,0,0};
-//    std::vector<File> untrackedFiles;
-//    while (flag) {
-//        publisher.notify();
+    int flag = 1, number = 0; // untrackedFiles[3] {0,0,0};
+    std::vector<File*> untrackedFiles;
+    while (flag) {
+        publisher.notify();
         //список отслеживаемых файлов
-//        publisher.showLists();
+        publisher.showLists();
         //возможность прекращения слежки
-//        out << "Enter number file for untracked or 0 for continue -> " << endl;
-//        in >> number;
-//        if ((number > 0) && (number <= 3)){
-//            switch (number) {
-//                case 1:{
-//                    out<<"untracked for file name:"<<file1.getName()<<endl;
-//                    publisher.removeFile(&file1);
-//                    untrackedFiles[0] = 1;
-//                    break;
-//                }
-//                case 2:{
-//                    out<<"untracked for file name:"<<file2.getName()<<endl;
-//                    publisher.removeFile(&file2);
-//                    untrackedFiles[1] = 1;
-//                    break;
-//                }
-//                case 3:{
-//                    out<<"untracked for file name:"<<file3.getName()<<endl;
-//                    publisher.removeFile(&file3);
-//                    untrackedFiles[2] = 1;
-//                    break;
-//                }
-//            }
-//        }
-        //возможность возобновить слежку
-//        if (untrackedFiles[0] || untrackedFiles[1] || untrackedFiles[2]){
-//            int i = 0;
-//            for (auto fn: untrackedFiles)
-//                out<<++i<<" "<<fn->getName()<<endl; //TODO check i
-//            out << "Enter number file for track or 0 for continue -> " << endl;
-//            in >> number;
-//            if ((number > 0) && (number <= untrackedFiles.size())){
-//                out<<"tracked for file name:"<<untrackedFiles[number-1]->getName()<<endl;
-//                publisher.addFile(untrackedFiles[number-1]);
-//                untrackedFiles.erase(remove(untrackedFiles.begin(), untrackedFiles.end(), untrackedFiles[number-1]), untrackedFiles.end());
-//            }
-//        }
-//        out << "Enter 0 for finish program or any number for continue -> " << endl;
-//        in >> flag;
+        out << "Enter number file for untracked or 0 for continue -> " << endl;
+        in >> number;
+        if ((number > 0) && (number <= Files.size())){
+            out<<"untracked for file name:"<<Files[number-1]->getName()<<endl;
+            untrackedFiles.push_back(Files[number-1]);
+            publisher.removeFile(Files[number-1]);
+        }
 
-        // TODO delete
-//        for (int i=0;i<Files.size();i++) {
-//            QFileInfo fileinfo(Files[i]->getName());
-//            qint64 size = fileinfo.size();
-//            Files[i]->setSize(size);
+//        возможность возобновить слежку
+        if (untrackedFiles.size()>0){
+            int i = 0;
+            out<<"\t\t\t untrackedFiles"<<endl;
+            for (auto fn: untrackedFiles)
+                out<<++i<<") "<<fn->getName()<<endl; //TODO check i
+            out << "Enter number file for track or 0 for continue -> " << endl;
+            in >> number;
+            if ((number > 0) && (number <= untrackedFiles.size())){
+                out<<"tracked for file name:"<<untrackedFiles[number-1]->getName()<<endl;
+                publisher.addFile(untrackedFiles[number-1]);
+                untrackedFiles.erase(remove(untrackedFiles.begin(), untrackedFiles.end(), untrackedFiles[number-1]), untrackedFiles.end());
+            }
+        }
+        out << "Enter 0 for finish program or any number for continue -> " << endl;
+        in >> flag;
+
 //        }
-//    }
+    }
 
 
 //    for (auto i: Files)
