@@ -9,47 +9,23 @@
 #include "src/Publisher.h"
 #include "src/File.h"
 
-QTextStream out(stdout);
-QTextStream in(stdin);
-
 int main() {
-//    QString first="123.txt";
-//    QFileInfo fileinfo(first);
-//    qint64 size = fileinfo.size();
-//    File file1(first,size);
-//
-//    Publisher publisher;
-//
-//    publisher.addFile(&file1);
-//
-//
-//    out<<file1.getName()<<" "<<file1.getSize()<<endl;
-//
-//    publisher.showLists();
-//    int n=0;
-//    out<<"-> "<<endl;
-//    in>>n;
-//    publisher.notify();
-//    publisher.showLists();
-
+    QTextStream out(stdout);
+    QTextStream in(stdin);
 
 // Вводим количество файлов fixme
-//    int countFiles = 3;
-//    out<<"Enter count files -> "<<endl;
-//    in >> countFiles;
+    int countFiles = 3;
+    out<<"Enter count files -> "<<endl;
+    in >> countFiles;
 
 //  Добавляем имена СУЩЕСТВУЮЩИХ файлов в вектор
-//    QString first="123.txt", second="11.txt", third="22.db";
     std::vector<QString> filesName;
-    filesName.push_back("123.txt");
-    filesName.push_back("11.txt");
-    filesName.push_back("22.db");
-//    QString name = ""; fixme
-//    for (int i=0;i<countFiles;i++){
-//        out<<"Enter file name -> "<<endl;
-//        in >> name;
-//        filesName.push_back(name);
-//    }
+    QString name = "";
+    for (int i=0;i<countFiles;i++){
+        out<<"Enter file name -> "<<endl;
+        in >> name;
+        filesName.push_back(name);
+    }
 
 //    проверяю список имен
 //    for (auto fn: filesName){
@@ -72,16 +48,6 @@ int main() {
 
 // вычисляем размеры файлов и добавляем их в список
     for (auto fn: filesName) {
-//        QFileInfo fileinfo(filesName[0]);
-//        qint64 size = fileinfo.size();
-//        File file1(filesName[0],size);
-//        QFileInfo fileinfo1(filesName[1]);
-//        size = fileinfo1.size();
-//        File file2(filesName[1], size);
-//        QFileInfo fileinfo2(filesName[2]);
-//        size = fileinfo1.size();
-//        File file3(filesName[2], size);
-
         QFileInfo fileinfo(fn);
         qint64 size = fileinfo.size();
         File *file = new File(fn, size);
@@ -93,9 +59,6 @@ int main() {
             out<<i->getName()<<" "<<i->getSize()<<endl;
 
 // делаем подписку
-//        publisher.addFile(&file1);
-//        publisher.addFile(&file2);
-//        publisher.addFile(&file3);
     for (auto file: Files) {
         publisher.addFile(file);
     }
@@ -132,20 +95,6 @@ int main() {
         }
         out << "Enter 0 for finish program or any number for continue -> " << endl;
         in >> flag;
-
-//        }
     }
-
-
-//    for (auto i: Files)
-//        out<<i->getName()<<" "<<i->getSize()<<endl;
-//    out<<file1.getName()<<" "<<file1.getSize()<<endl;
-//    publisher.showLists();
-//    publisher.removeFile(Files[1]);
-//    publisher.notify();
-//    for (auto i: Files)
-//        out<<i->getName()<<" "<<i->getSize()<<endl;
-//    out<<file1.getName()<<" "<<file1.getSize()<<endl;
-//    publisher.showLists();
     return 0;
 }
